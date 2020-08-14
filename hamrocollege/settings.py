@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # my apps
-    'attendence',
+    'attendance',
     'account',
     'classroom',
 
@@ -88,15 +88,10 @@ WSGI_APPLICATION = 'hamrocollege.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': os.environ.get('SET_DB_NAME'),
-        # 'USER': os.environ.get('SET_DB_USER'),
-        # 'PASSWORD': os.environ.get('SET_DB_PASSWORD'),
-        # 'HOST': os.environ.get('SET_DB_HOST')
-        'NAME': 'HamrocollegePremier',
-        'USER': 'postgres',
-        'PASSWORD': 'sujankhyaju',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': os.environ.get('SET_DB_NAME'),
+        'USER': os.environ.get('SET_DB_USER'),
+        'PASSWORD': os.environ.get('SET_DB_PASSWORD'),
+        'HOST': os.environ.get('SET_DB_HOST')
     }
 }
 
@@ -137,7 +132,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
 # mail configuration
 # EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
 # EMAIL_HOST = os.environ.get('EMAIL_HOST')

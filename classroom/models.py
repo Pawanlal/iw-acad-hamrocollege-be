@@ -1,40 +1,44 @@
+import uuid
+
 from django.db import models
 from account.models import User
 
-import datetime
+
+def file_location(instance, filename):
+    extension = filename.split('.')[-1]
+    unique_id = str(uuid.uuid4().hex)
+    new_filename = unique_id+'.'+extension
+
+    file_path = 'classroom/{new_filename}'.format(
+        new_filename=new_filename
+    )
+    return file_path
+
 
 class Classroom(models.Model):
-
-    classroom_id = models.AutoField(primary_key=True)
-    classroom_title = models.CharField(max_length=100, unique=True)
-    classroom_created_at = models.DateTimeField(auto_now_add=True)
-    classroom_creator = models.CharField(max_length=100)
-    classroom_faculty = models.CharField(max_length=100)
-
+    title = models.CharField(max_length=100, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    faculty = models.CharField(max_length=100)
+    passcode = models.CharField(max_length=8)
 
     def __str__(self):
-        return self.classroom_title
+        return self.title
 
 
 class ClassroomMember(models.Model):
-    member_id = models.AutoField(primary_key=True)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_creator = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.is_creator
-
 
 class ClassroomDiscussion(models.Model):
-    discussion_id = models.AutoField(primary_key=True)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
-
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
-    comment = models.TextField()
-    # file = models.FileField()
+    text = models.TextField(max_length=5000)
+    file = models.FileField(upload_to=file_location)
 
     def __str__(self):
         return self.comment
