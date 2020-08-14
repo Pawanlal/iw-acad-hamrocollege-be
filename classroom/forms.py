@@ -1,6 +1,6 @@
 from django import forms
 
-from classroom.models import Classroom , ClassDiscussion , ClassroomMember
+from classroom.models import Classroom , ClassroomDiscussion , ClassroomMember
 
 class ClassroomForm(forms.ModelForm):
     class Meta:
@@ -12,12 +12,12 @@ class ClassroomForm(forms.ModelForm):
 class ClassroomMemberForm(forms.ModelForm):
     class Meta:
         model = ClassroomMember
-        fields = ['user_id']
+        fields = ['user_id',]
 
 
 class ClassDiscussionForm(forms.ModelForm):
     class Meta:
-        model = ClassDiscussion
+        model = ClassroomDiscussion
         fields = ['user_id','comment']
 
 

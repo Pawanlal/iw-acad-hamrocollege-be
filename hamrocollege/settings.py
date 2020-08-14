@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = '1iubqj1tgj7_x4hpd&*ct#$q_c5k8w2qmu$bykil^n(698m+v-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -32,8 +32,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # my apps
+    'attendence',
     'account',
     'classroom',
+
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -85,11 +87,16 @@ WSGI_APPLICATION = 'hamrocollege.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('SET_DB_NAME'),
-        'USER': os.environ.get('SET_DB_USER'),
-        'PASSWORD': os.environ.get('SET_DB_PASSWORD'),
-        'HOST': os.environ.get('SET_DB_HOST')
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': os.environ.get('SET_DB_NAME'),
+        # 'USER': os.environ.get('SET_DB_USER'),
+        # 'PASSWORD': os.environ.get('SET_DB_PASSWORD'),
+        # 'HOST': os.environ.get('SET_DB_HOST')
+        'NAME': 'HamrocollegePremier',
+        'USER': 'postgres',
+        'PASSWORD': 'sujankhyaju',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -132,8 +139,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # mail configuration
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
+# EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+# EMAIL_HOST = os.environ.get('EMAIL_HOST')
+# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+# EMAIL_PORT = os.environ.get('EMAIL_PORT')
