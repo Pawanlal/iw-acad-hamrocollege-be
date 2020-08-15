@@ -1,7 +1,13 @@
+import math
+import random
 import uuid
 
 from django.db import models
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
+
 from account.models import User
+from college.models import Section, Faculty, SubjectList
 
 
 def file_location(instance, filename):
@@ -15,12 +21,24 @@ def file_location(instance, filename):
     return file_path
 
 
+def access_code():
+    string = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    length = len(string)
+    code = ""
+    for i in range(8):
+        code += string[math.floor(random.random() * length)]
+    return code
+
+
 class Classroom(models.Model):
     title = models.CharField(max_length=100, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
-    faculty = models.CharField(max_length=100)
-    passcode = models.CharField(max_length=8)
+    faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
+    section = models.OneToOneField(Section, on_delete=models.CASCADE)
+    subject = models.ManyToManyField(SubjectList)
+    passcode = models.CharField(max_length=8, default=access_code)
 
     def __str__(self):
         return self.title
@@ -30,6 +48,9 @@ class ClassroomMember(models.Model):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_creator = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.first_name
 
 
 class ClassroomDiscussion(models.Model):
@@ -41,5 +62,9 @@ class ClassroomDiscussion(models.Model):
     file = models.FileField(upload_to=file_location)
 
     def __str__(self):
-        return self.comment
+        return self.user.first_name
 
+
+@receiver(post_delete, sender=ClassroomDiscussion)
+def submission_delete(sender, instance, **kwargs):
+    instance.file.delete(False)
