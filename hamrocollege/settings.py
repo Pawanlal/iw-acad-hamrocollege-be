@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     # my apps
     'account',
     'college',
+    'assignments',
+    'library',
     
     'django.contrib.admin',
     'django.contrib.auth',
