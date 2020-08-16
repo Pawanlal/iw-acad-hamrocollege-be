@@ -10,7 +10,7 @@ class Club(models.Model):
     created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.first_name
+        return self.name
 
     class Meta:
         ordering = ['name']
@@ -23,7 +23,7 @@ class Member(models.Model):
     is_creator = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.club.name + '-' + self.user.name
+        return self.club.name + '-' + self.user.first_name
 
     class Meta:
         ordering = ['club']
