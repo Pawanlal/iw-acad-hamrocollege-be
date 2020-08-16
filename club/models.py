@@ -1,8 +1,20 @@
+import uuid
+
 from django.db import models
 
 from account.models import User
 
 # Create your models here.
+
+def file_location(instance, filename):
+    extension = filename.split('.')[-1]
+    unique_id = str(uuid.uuid4().hex)
+    new_filename = unique_id+'.'+extension
+
+    file_path = 'club/{new_filename}'.format(
+        new_filename=new_filename
+    )
+    return file_path
 
 class Club(models.Model):
     id = models.AutoField(primary_key=True)
@@ -37,6 +49,7 @@ class Announcement(models.Model):
     message = models.TextField()
     created_at = models.DateField(auto_now_add=True)
     modified_at = models.DateField(auto_now=True)
+    file = models.FileField(upload_to=file_location)
 
     def __str__(self):
         return self.club.name + '-' + self.message
