@@ -49,9 +49,10 @@ class Announcement(models.Model):
     message = models.TextField()
     created_at = models.DateField(auto_now_add=True)
     modified_at = models.DateField(auto_now=True)
-    file = models.FileField(upload_to=file_location)
+    file = models.FileField(upload_to=file_location, null=True, blank=True)
 
     def __str__(self):
         return self.club.name + '-' + self.message
+
 
 
