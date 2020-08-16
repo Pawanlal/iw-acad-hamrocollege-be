@@ -34,6 +34,7 @@ class Announcement(models.Model):
     club = models.ForeignKey(Club, on_delete= models.CASCADE)
     announce_by = models.CharField(max_length=100)
     message = models.TextField()
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     modified_at = models.DateField(auto_now=True)
 
