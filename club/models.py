@@ -8,6 +8,7 @@ class Club(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, unique=True)
     created_at = models.DateField(auto_now_add=True)
+    created_by = models.ForeignKey(User, on_delete= models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -32,9 +33,8 @@ class Member(models.Model):
 class Announcement(models.Model):
     id = models.AutoField(primary_key=True)
     club = models.ForeignKey(Club, on_delete= models.CASCADE)
-    announce_by = models.CharField(max_length=100)
+    announce_by = models.ForeignKey(User,on_delete=models.CASCADE)
     message = models.TextField()
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     modified_at = models.DateField(auto_now=True)
 
