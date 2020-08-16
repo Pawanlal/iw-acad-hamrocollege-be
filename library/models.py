@@ -5,9 +5,8 @@ from datetime import date, timedelta, datetime
 
 class Author(models.Model):
     firstname = models.CharField(max_length=200, blank=False)
-    lastname = models.CharField(max_length=200, blank=False)
-    dob = models.DateField(blank=False)
-    fullname = models.CharField(max_length=200, blank=False, null=False)
+    lastname = models.CharField(max_length=200, blank=False)    
+    
     def __str__(self):
         return self.firstname + " " + self.lastname
     
@@ -33,7 +32,8 @@ class Book(models.Model):
     title = models.CharField(max_length=200, blank=False)
     author = models.ForeignKey('Author',on_delete=models.CASCADE)
     isbn = models.BigIntegerField(blank=False)
-    publisher = models.ForeignKey('Publisher',on_delete=models.CASCADE)    
+    publisher = models.ForeignKey('Publisher',on_delete=models.CASCADE)   
+    edition = models.BigIntegerField(blank=False, default=0)
 
     def __str__(self):
         return self.book_id + " - " + self.title    

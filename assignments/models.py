@@ -5,11 +5,10 @@ from account.models import User
 # Create your models here.
 class Assignment(models.Model):
     title = models.CharField(max_length=255)    
-    upload = models.FileField(null=True, default="No file uploaded")
+    upload = models.FileField(upload_to='assign/',null=False, default="No file uploaded", blank=False)
     due_date = models.DateField()
-    created_at = models.DateField(auto_now_add=True)
-    last_updated = models.DateField(auto_now=True)    
-    subject_title = models.ForeignKey(SubjectList,on_delete=models.CASCADE,
+    created_at = models.DateField(auto_now_add=True)    
+    subject = models.ForeignKey(SubjectList,on_delete=models.CASCADE,
         related_name='assignments')
     user = models.ForeignKey(
         User,
@@ -21,9 +20,8 @@ class Assignment(models.Model):
         return self.title
 
 class Submission(models.Model):    
-    upload = models.FileField(upload_to='submissions/')
-    submitted_at = models.DateField(auto_now=True)
-    last_updated = models.DateField(auto_now=True)
+    upload = models.FileField(upload_to='submissions/',null=False, blank=False)
+    submitted_at = models.DateField(auto_now=True)    
     assignment = models.ForeignKey(
         'Assignment',
         on_delete=models.CASCADE,
