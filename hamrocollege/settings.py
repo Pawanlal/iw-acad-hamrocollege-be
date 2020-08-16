@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1iubqj1tgj7_x4hpd&*ct#$q_c5k8w2qmu$bykil^n(698m+v-'
+SECRET_KEY = os.environ.get('SET_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'attendance',
     'account',
     'classroom',
+    'club',
 
     'college',
 
@@ -93,6 +94,7 @@ DATABASES = {
         'USER': os.environ.get('SET_DB_USER'),
         'PASSWORD': os.environ.get('SET_DB_PASSWORD'),
         'HOST': os.environ.get('SET_DB_HOST')
+
     }
 }
 
