@@ -1,11 +1,13 @@
 from django.conf import settings
 from django.db import models
 
+from college.models import SubjectList
+
 
 class Quiz(models.Model):
     title = models.CharField(max_length=255)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='quizzes')
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    subject = models.ForeignKey(SubjectList, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -29,7 +31,7 @@ class Answer(models.Model):
 
 
 class TakenQuiz(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='taken_quizzes')
     score = models.IntegerField()
     percentage = models.FloatField()
@@ -37,6 +39,6 @@ class TakenQuiz(models.Model):
 
 
 class StudentAnswer(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='quiz_answer')
+    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='quiz_answer')
     date = models.DateTimeField(auto_now_add=True)
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name='student_answer')
