@@ -35,9 +35,21 @@ class Notice(models.Model):
     date_updated = models.DateTimeField(auto_now=True, verbose_name="date updated")
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     slug = models.SlugField(blank=True, unique=True)
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='notice_like', null=True, blank=True)
 
     def __str__(self):
         return self.slug
+
+
+class Comment(models.Model):
+    notice = models.ForeignKey(Notice, on_delete=models.CASCADE)
+    body = models.CharField(max_length=500)
+    commented_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+    # manually deactivate inappropriate comments by admin
+    active = models.BooleanField(default=True)
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='replies', on_delete=models.CASCADE)
 
 
 @receiver(post_delete, sender=Notice)
