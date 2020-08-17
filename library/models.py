@@ -55,7 +55,7 @@ class BookIssue(models.Model):
 
 class Fine(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    book_issue= models.ForeignKey(BookIssue,on_delete=models.CASCADE)
+    book_issue= models.ForeignKey(BookIssue, on_delete=models.CASCADE)
     amount=models.IntegerField(default=0)
 
     def __str__(self):
