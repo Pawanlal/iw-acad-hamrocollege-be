@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'classroom',
     'club',
     'college',
+    'assignments',
+    'library',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
