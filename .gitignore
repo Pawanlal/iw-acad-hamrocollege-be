@@ -2,7 +2,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/pycharm,django,linux,database
 # Edit at https://www.toptal.com/developers/gitignore?templates=pycharm,django,linux,database
 
-#static files
+#static and media files
+
 media_cdn/
 
 ### Database ###

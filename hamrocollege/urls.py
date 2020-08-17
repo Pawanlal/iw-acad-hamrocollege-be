@@ -22,6 +22,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
     path('notice/', include('notice.urls')),
+    path('classroom/', include('classroom.urls',namespace='classroom')),
+    path('attendance/', include('attendance.urls', namespace='attendance')),
+    path('club/', include('club.urls', namespace='club')),
 ]
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
