@@ -68,8 +68,7 @@ class BookRequest(models.Model):
         REJECTED = 'Rejected'
         ONPROCESS = 'On-process'
         APPROVED = 'Approved'   	     
-        
-    
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     status = models.CharField(choices=STATUS_TYPE.choices, default='Approved',max_length=10)

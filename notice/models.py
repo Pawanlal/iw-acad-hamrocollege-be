@@ -35,7 +35,7 @@ class Notice(models.Model):
     date_updated = models.DateTimeField(auto_now=True, verbose_name="date updated")
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     slug = models.SlugField(blank=True, unique=True)
-    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='notice_like', null=True, blank=True)
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='notice_like')
 
     def __str__(self):
         return self.slug
