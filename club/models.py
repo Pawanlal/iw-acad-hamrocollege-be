@@ -4,7 +4,6 @@ from django.db import models
 
 from account.models import User
 
-# Create your models here.
 
 def file_location(instance, filename):
     extension = filename.split('.')[-1]
@@ -15,6 +14,7 @@ def file_location(instance, filename):
         new_filename=new_filename
     )
     return file_path
+
 
 class Club(models.Model):
     id = models.AutoField(primary_key=True)
@@ -30,7 +30,7 @@ class Club(models.Model):
 
 
 class Member(models.Model):
-    id = models.AutoField(primary_key = True)
+    id = models.AutoField(primary_key=True)
     club = models.ForeignKey(Club, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_creator = models.BooleanField(default=False)

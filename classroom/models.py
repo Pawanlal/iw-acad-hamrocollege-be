@@ -2,6 +2,7 @@ import math
 import random
 import uuid
 
+from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
@@ -63,6 +64,17 @@ class ClassroomDiscussion(models.Model):
 
     def __str__(self):
         return self.user.first_name
+
+
+class Comment(models.Model):
+    classroom_discussion = models.ForeignKey(ClassroomDiscussion, on_delete=models.CASCADE)
+    body = models.CharField(max_length=500)
+    commented_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+    # manually deactivate inappropriate comments by admin
+    active = models.BooleanField(default=True)
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='replies', on_delete=models.CASCADE)
 
 
 @receiver(post_delete, sender=ClassroomDiscussion)

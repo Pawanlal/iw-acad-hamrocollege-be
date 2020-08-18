@@ -67,11 +67,11 @@ class BookRequest(models.Model):
         PENDING = 'Pending'
         REJECTED = 'Rejected'
         ONPROCESS = 'On-process'
-        APPROVED = 'Approved'   	     
+        APPROVED = 'Approved'
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    status = models.CharField(choices=STATUS_TYPE.choices, default='Approved',max_length=10)
+    status = models.CharField(choices=STATUS_TYPE.choices, default='Pending', max_length=10)
     request_date = models.DateField(blank=True, null=True, default=None)
 
     def __str__(self):
