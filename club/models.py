@@ -1,6 +1,8 @@
 import uuid
 
 from django.db import models
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 from account.models import User
 
@@ -55,4 +57,6 @@ class Announcement(models.Model):
         return self.club.name + '-' + self.message
 
 
-
+@receiver(post_delete, sender=Announcement)
+def submission_delete(sender, instance, **kwargs):
+    instance.file.delete(False)

@@ -1,6 +1,9 @@
 import uuid
 
 from django.db import models
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
+
 from college.models import SubjectList
 from account.models import User
 
@@ -57,3 +60,13 @@ class Submission(models.Model):
 
     def __str__(self):
         return self.user.first_name
+
+
+@receiver(post_delete, sender=Assignment)
+def submission_delete(sender, instance, **kwargs):
+    instance.upload.delete(False)
+
+
+@receiver(post_delete, sender=Submission)
+def submission_delete(sender, instance, **kwargs):
+    instance.upload.delete(False)
