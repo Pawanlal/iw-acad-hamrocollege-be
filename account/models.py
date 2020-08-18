@@ -68,23 +68,11 @@ class MyUserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    # constants in model class
-    ADMIN = 0
-    TEACHER = 1
-    LIBRARIAN = 2
-    STUDENT = 3
-    USER_ROLE_CHOICES = (
-        (ADMIN, 'Admin'),
-        (TEACHER, 'Teacher'),
-        (LIBRARIAN, 'Librarian'),
-        (STUDENT, 'Student'),
-    )
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.EmailField(verbose_name='email', max_length=60, unique=True)
     username = models.CharField(max_length=150, unique=True)
     profile = models.ImageField(upload_to=file_location, null=True, blank=True)
-    user_role = models.IntegerField(choices=USER_ROLE_CHOICES, default=STUDENT,)
     date_joined = models.DateTimeField(verbose_name='date_joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last_login', auto_now=True)
     is_admin = models.BooleanField(default=False)
@@ -96,7 +84,6 @@ class User(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    # REQUIRED_FIELDS = ['username', ]
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
     objects = MyUserManager()
