@@ -69,7 +69,7 @@ class ClassroomDiscussion(models.Model):
 class Comment(models.Model):
     classroom_discussion = models.ForeignKey(ClassroomDiscussion, on_delete=models.CASCADE)
     body = models.CharField(max_length=500)
-    commented_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    commented_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comment')
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     # manually deactivate inappropriate comments by admin
