@@ -1,7 +1,7 @@
 """hamrocollege URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
+    https://docs.djangoproject.com/en/3.0/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -17,15 +17,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/account/', include('account.urls')),    
     path('api/', include('college.urls')),
-    path('notice/', include('notice.urls')),
-    path('classroom/', include('classroom.urls',namespace='classroom')),
-    path('attendance/', include('attendance.urls', namespace='attendance')),
-    path('club/', include('club.urls', namespace='club')),
+    path('api/assign', include('assignments.urls', namespace='assign')),    
+    path('api/library', include('library.urls', namespace='library')),
 ]
 
 if settings.DEBUG:

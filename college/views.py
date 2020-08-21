@@ -33,7 +33,7 @@ class SemesterListModelViewSet(ModelViewSet):
         if self.action in ['create', 'update', 'partial_update', 'destroy']:
             permissions = [IsAdmin]
         else:
-            permissions = [AllowAny]
+            permissions = [IsAuthenticated]
         return [permission() for permission in permissions]
 
 class SectionModelViewSet(ModelViewSet):
@@ -46,7 +46,7 @@ class SectionModelViewSet(ModelViewSet):
         if self.action in ['create', 'update', 'partial_update', 'destroy']:
             permissions = [IsAdmin]
         else:
-            permissions = [AllowAny]
+            permissions = [IsAuthenticated]
         return [permission() for permission in permissions]
         
 
@@ -60,5 +60,5 @@ class SubjectListModelViewSet(ModelViewSet):
         if self.action in ['create', 'update', 'partial_update', 'destroy']:
             permissions = [IsAdmin]
         else:
-            permissions = [AllowAny]
+            permissions = [IsAuthenticated]
         return [permission() for permission in permissions]
