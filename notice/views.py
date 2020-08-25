@@ -26,7 +26,7 @@ class CategoryModelViewSet(ModelViewSet):
 class NoticeModelViewSet(ModelViewSet):
     queryset = Notice.objects.all()
     serializer_class = NoticeModelSerializer
-    pagination_class = MyPageNumberPagination
+    # pagination_class = MyPageNumberPagination
     authentication_classes = [TokenAuthentication, ]
 
     def get_permissions(self):

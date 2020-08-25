@@ -1,7 +1,10 @@
-from django.urls import path
+from django.urls import path, include
 
-from rest_framework.authtoken.views import obtain_auth_token
+from .views import RegisterGenericAPIView, LoginGenericAPIView, UserGenericAPIView, LogoutAPIView
 
 urlpatterns = [
-    path('login/', obtain_auth_token),
+    path('auth/register/', RegisterGenericAPIView.as_view()),
+    path('auth/login/', LoginGenericAPIView.as_view()),
+    path('auth/user/', UserGenericAPIView.as_view()),
+    path('auth/logout/', LogoutAPIView.as_view()),
 ]

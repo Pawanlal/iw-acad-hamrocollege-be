@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SET_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # my apps
     'attendance',
+
     'account',
     'notice',
     'classroom',
@@ -48,10 +49,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+
     'rest_framework.authtoken',
+    'corsheaders',
 ]
 
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -83,6 +91,7 @@ TEMPLATES = [
 AUTH_USER_MODEL = 'account.User'
 
 WSGI_APPLICATION = 'hamrocollege.wsgi.application'
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Database
