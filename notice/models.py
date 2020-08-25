@@ -33,7 +33,7 @@ class Notice(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     date_published = models.DateTimeField(auto_now_add=True, verbose_name="date published")
     date_updated = models.DateTimeField(auto_now=True, verbose_name="date updated")
-    authgs.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     slug = models.SlugField(blank=True, unique=True)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='notice_like')
 
