@@ -112,6 +112,7 @@ DATABASES = {
         'PASSWORD': os.environ.get('SET_DB_PASSWORD'),
         'HOST': os.environ.get('SET_DB_HOST')
 
+
     }
 }
 
