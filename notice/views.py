@@ -12,7 +12,7 @@ from .serializers import CategoryModelSerializer, NoticeModelSerializer, Comment
 class CategoryModelViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategoryModelSerializer
-    pagination_class = MyPageNumberPagination
+    # pagination_class = MyPageNumberPagination
     authentication_classes = [TokenAuthentication, ]
 
     def get_permissions(self):

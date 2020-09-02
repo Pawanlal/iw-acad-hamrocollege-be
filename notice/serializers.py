@@ -11,9 +11,12 @@ class CategoryModelSerializer(serializers.ModelSerializer):
 
 
 class NoticeModelSerializer(serializers.ModelSerializer):
+    notice_owner = serializers.CharField(source='author.username', read_only=True)
+
     class Meta:
         model = Notice
-        fields = ['id', 'text', 'file', 'category', 'date_published', 'date_updated', 'author', 'slug', 'likes']
+        fields = ['id', 'text', 'file', 'category', 'date_published', 'date_updated', 'author',
+                  'slug', 'likes', 'notice_owner', ]
         read_only_fields = ['id']
 
 

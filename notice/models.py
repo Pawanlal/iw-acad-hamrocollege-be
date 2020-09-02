@@ -38,7 +38,7 @@ class Notice(models.Model):
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='notice_like')
 
     class Meta:
-        ordering: ['id']
+        ordering: ['-id']
 
     def __str__(self):
         return self.slug

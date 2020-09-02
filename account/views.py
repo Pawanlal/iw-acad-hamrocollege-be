@@ -1,12 +1,14 @@
 from django.contrib.auth import logout
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
 from rest_framework.generics import GenericAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .models import User
 from .serializers import RegisterSerializer, UserSerializer, LoginSerializer
 
 
@@ -65,7 +67,16 @@ class LogoutAPIView(APIView):
 # Get User API
 class UserGenericAPIView(RetrieveAPIView):
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, ]
+    authentication_classes = [TokenAuthentication, ]
 
     def get_object(self):
         return self.request.user
+
+
+class UserRetrieveAPIView(RetrieveAPIView):
+    queryset = User.objects.all()
+    lookup_field = 'username'
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated, ]
+    authentication_classes = [TokenAuthentication]
