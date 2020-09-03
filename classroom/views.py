@@ -8,11 +8,12 @@ from .pagination import MyPageNumberPagination
 from .permissions import IsTeacher, IsStudent
 from .serializers import ClassroomModelSerializer, ClassroomDiscussionModelSerializer, ClassroomMemberModelSerializer, CommentModelSerializer
 
+
 class ClassroomModelViewSet(ModelViewSet):
     queryset = Classroom.objects.all()
     serializer_class = ClassroomModelSerializer
-    authentication_classes = [TokenAuthentication,]
-    pagination_class = MyPageNumberPagination
+    authentication_classes = [TokenAuthentication, ]
+    # pagination_class = MyPageNumberPagination
 
     def get_permissions(self):
         if self.action == 'create' or self.action == 'update' or self.action == 'destroy':
@@ -27,7 +28,7 @@ class ClassroomDiscussionModelViewSet(ModelViewSet):
     queryset = ClassroomDiscussion.objects.all()
     serializer_class = ClassroomDiscussionModelSerializer
     authentication_classes = [TokenAuthentication,]
-    pagination_class = MyPageNumberPagination
+    # pagination_class = MyPageNumberPagination
 
     def get_permissions(self):
         if self.action == 'create' or self.action == 'update' or self.action == 'destroy':
@@ -37,6 +38,7 @@ class ClassroomDiscussionModelViewSet(ModelViewSet):
             permissions = [IsAuthenticated]
 
         return [permission() for permission in permissions]
+
 
 class ClassroomMemberModelViewSet(ModelViewSet):
     queryset = ClassroomMember.objects.all()

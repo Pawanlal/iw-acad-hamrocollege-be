@@ -4,9 +4,14 @@ from .models import Classroom, ClassroomMember, ClassroomDiscussion, Comment
 
 
 class ClassroomModelSerializer(serializers.ModelSerializer):
+    creator_name = serializers.CharField(source='creator_id.username', read_only=True)
+    faculty_name = serializers.CharField(source='faculty.name', read_only=True)
+    section_name = serializers.CharField(source='section.section', read_only=True)
+
     class Meta:
         model = Classroom
-        fields = ['id', 'title', 'created_at', 'updated_at', 'passcode', 'creator_id', 'faculty', 'section']
+        fields = ['id', 'title', 'created_at', 'updated_at', 'passcode', 'creator_id',
+                  'faculty', 'section', 'creator_name', 'faculty_name', 'section_name']
         read_only_fields = ['id']
 
 
