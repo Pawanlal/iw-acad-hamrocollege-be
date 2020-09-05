@@ -63,7 +63,7 @@ class Submission(models.Model):
 
 
 @receiver(post_delete, sender=Assignment)
-def submission_delete(sender, instance, **kwargs):
+def assignment_delete(sender, instance, **kwargs):
     instance.upload.delete(False)
 
 

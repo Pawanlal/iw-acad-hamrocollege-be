@@ -25,8 +25,8 @@ urlpatterns = [
     path('attendance/', include('attendance.urls', namespace='attendance')),
     path('club/', include('club.urls', namespace='club')),
     path('api/', include('college.urls')),
-    path('api/assign', include('assignments.urls', namespace='assign')),    
-    path('api/library', include('library.urls', namespace='library'))
+    path('api/', include('assignments.urls', namespace='assign')),
+    path('api/', include('library.urls', namespace='library'))
 ]
 
 if settings.DEBUG:

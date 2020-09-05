@@ -13,7 +13,7 @@ class AssignmentModelViewSet(ModelViewSet):
     queryset = Assignment.objects.all()
     serializer_class = AssignmentModelSerializer
     authentication_classes = [TokenAuthentication,]
-    pagination_class = MyPageNumberPagination
+    # pagination_class = MyPageNumberPagination
 
     def get_permissions(self):
         if self.action == 'create' or self.action == 'update' or self.action == 'destroy':
@@ -28,7 +28,7 @@ class SubmissionModelViewSet(ModelViewSet):
     queryset=Submission.objects.all()
     serializer_class=SubmissionModelSerializer
     authentication_classes=[TokenAuthentication,]
-    pagination_class=MyPageNumberPagination
+    # pagination_class=MyPageNumberPagination
 
     def get_permissions(self):
         if self.action == 'create' or self.action == 'destroy':
