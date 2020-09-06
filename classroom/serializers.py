@@ -11,7 +11,7 @@ class ClassroomModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Classroom
         fields = ['id', 'title', 'created_at', 'updated_at', 'passcode', 'creator',
-                  'faculty', 'section', 'creator_name', 'faculty_name', 'section_name']
+                  'faculty', 'section', 'creator_name', 'faculty_name', 'section_name', 'subject']
         read_only_fields = ['id']
 
 

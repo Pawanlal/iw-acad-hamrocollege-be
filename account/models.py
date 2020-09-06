@@ -9,12 +9,10 @@ from rest_framework.authtoken.models import Token
 
 def file_location(instance, filename):
     extension = filename.split('.')[-1]
-    user_id = str(instance.id)
     unique_id = str(uuid.uuid4())
     new_filename = unique_id+'.'+extension
 
-    file_path = 'profile/{user_id}/{new_filename}'.format(
-        user_id=user_id,
+    file_path = 'profile/{new_filename}'.format(
         new_filename=new_filename
     )
     return file_path
@@ -73,7 +71,7 @@ class User(AbstractBaseUser):
     last_name = models.CharField(max_length=30)
     email = models.EmailField(verbose_name='email', max_length=60, unique=True)
     username = models.CharField(max_length=150, unique=True)
-    profile = models.ImageField(upload_to=file_location, null=True, blank=True)
+    profile = models.ImageField(upload_to=file_location, null=True, blank=True, default='profile/8f8e5c0fb276444788ad1001ddcf833c.png')
     date_joined = models.DateTimeField(verbose_name='date_joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last_login', auto_now=True)
     is_admin = models.BooleanField(default=False)

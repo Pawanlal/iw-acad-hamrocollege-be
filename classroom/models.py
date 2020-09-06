@@ -38,7 +38,7 @@ class Classroom(models.Model):
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
-    subject = models.ManyToManyField(SubjectList, related_name='subject')
+    subject = models.ManyToManyField(SubjectList)
     passcode = models.CharField(max_length=8, default=access_code)
 
     def __str__(self):

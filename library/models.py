@@ -27,7 +27,6 @@ class Publisher(models.Model):
 
 
 class Book(models.Model):
-    book_id = models.CharField(max_length=10, blank=False, primary_key=True)    
     title = models.CharField(max_length=200, blank=False)
     author = models.ForeignKey('Author',on_delete=models.CASCADE)
     isbn = models.BigIntegerField(blank=False)
@@ -35,7 +34,7 @@ class Book(models.Model):
     edition = models.BigIntegerField(blank=False, default=0)
 
     def __str__(self):
-        return self.book_id + " - " + self.title    
+        return self.title
 
     class Meta:
         ordering = ['title']
@@ -68,9 +67,9 @@ class BookRequest(models.Model):
         ONPROCESS = 'On-process'
         APPROVED = 'Approved'
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    status = models.CharField(choices=STATUS_TYPE.choices, default='Pending', max_length=10)
+    status = models.CharField(choices=STATUS_TYPE.choices, default=STATUS_TYPE.PENDING, max_length=10)
     request_date = models.DateField(blank=True, null=True, default=None)
 
     def __str__(self):

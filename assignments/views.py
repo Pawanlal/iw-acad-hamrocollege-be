@@ -4,7 +4,7 @@ from rest_framework.viewsets import ModelViewSet
 
 
 from .models import Assignment, Submission
-from .pagination import MyPageNumberPagination
+# from .pagination import MyPageNumberPagination
 from .permissions import IsTeacher, IsStudent
 from .serializers import AssignmentModelSerializer, SubmissionModelSerializer
 
@@ -12,7 +12,7 @@ from .serializers import AssignmentModelSerializer, SubmissionModelSerializer
 class AssignmentModelViewSet(ModelViewSet):
     queryset = Assignment.objects.all()
     serializer_class = AssignmentModelSerializer
-    authentication_classes = [TokenAuthentication,]
+    authentication_classes = [TokenAuthentication, ]
     # pagination_class = MyPageNumberPagination
 
     def get_permissions(self):
@@ -27,7 +27,7 @@ class AssignmentModelViewSet(ModelViewSet):
 class SubmissionModelViewSet(ModelViewSet):
     queryset=Submission.objects.all()
     serializer_class=SubmissionModelSerializer
-    authentication_classes=[TokenAuthentication,]
+    authentication_classes=[TokenAuthentication, ]
     # pagination_class=MyPageNumberPagination
 
     def get_permissions(self):

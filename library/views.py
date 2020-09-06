@@ -8,11 +8,12 @@ from .pagination import MyPageNumberPagination
 from .permissions import IsTeacher, IsStudent, IsLibrarian
 from .serializers import AuthorModelSerializer, PublisherModelSerializer, FineModelSerializer, BookModelSerializer, BookIssueModelSerializer, BookRequestModelSerializer
 
+
 class AuthorModelViewSet(ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer
     authentication_classes = [TokenAuthentication,]
-    pagination_class = MyPageNumberPagination
+    # pagination_class = MyPageNumberPagination
 
     def get_permissions(self):
         if self.action == 'create' or self.action == 'update' or self.action == 'destroy':
@@ -27,7 +28,7 @@ class PublisherModelViewSet(ModelViewSet):
     queryset = Publisher.objects.all()
     serializer_class = PublisherModelSerializer
     authentication_classes = [TokenAuthentication,]
-    pagination_class = MyPageNumberPagination
+    # pagination_class = MyPageNumberPagination
 
     def get_permissions(self):
         if self.action == 'create' or self.action == 'update' or self.action == 'destroy':
@@ -42,7 +43,7 @@ class BookModelViewSet(ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookModelSerializer
     authentication_classes = [TokenAuthentication,]
-    pagination_class = MyPageNumberPagination
+    # pagination_class = MyPageNumberPagination
 
     def get_permissions(self):
         if self.action == 'create' or self.action == 'update' or self.action == 'destroy':
@@ -57,7 +58,7 @@ class BookIssueModelViewSet(ModelViewSet):
     queryset = BookIssue.objects.all()
     serializer_class = BookIssueModelSerializer
     authentication_classes = [TokenAuthentication,]
-    pagination_class = MyPageNumberPagination
+    # pagination_class = MyPageNumberPagination
 
     def get_permissions(self):
         if self.action == 'create' or self.action == 'update' or self.action == 'destroy':
@@ -71,12 +72,12 @@ class BookIssueModelViewSet(ModelViewSet):
 class BookRequestModelViewSet(ModelViewSet):
     queryset = BookRequest.objects.all()
     serializer_class = BookRequestModelSerializer
-    authentication_classes = [TokenAuthentication,]
-    pagination_class = MyPageNumberPagination
+    authentication_classes = [TokenAuthentication, ]
+    # pagination_class = MyPageNumberPagination
 
     def get_permissions(self):
         if self.action == 'create' or self.action == 'update' or self.action == 'destroy':
-            permissions = [IsTeacher, IsStudent]
+            permissions = [IsStudent | IsTeacher]
         else:
             permissions = [IsAuthenticated]
 
@@ -86,8 +87,8 @@ class BookRequestModelViewSet(ModelViewSet):
 class FineModelViewSet(ModelViewSet):
     queryset = Fine.objects.all()
     serializer_class = FineModelSerializer
-    authentication_classes = [TokenAuthentication,]
-    pagination_class = MyPageNumberPagination
+    authentication_classes = [TokenAuthentication, ]
+    # pagination_class = MyPageNumberPagination
 
     def get_permissions(self):
         if self.action == 'create' or self.action == 'update' or self.action == 'destroy':

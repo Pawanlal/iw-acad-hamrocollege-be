@@ -3,11 +3,12 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
-from rest_framework.generics import GenericAPIView, RetrieveAPIView
+from rest_framework.generics import GenericAPIView, RetrieveAPIView, ListAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from college.permissions import IsAdmin
 from .models import User
 from .serializers import RegisterSerializer, UserSerializer, LoginSerializer
 
@@ -80,3 +81,14 @@ class UserRetrieveAPIView(RetrieveAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated, ]
     authentication_classes = [TokenAuthentication]
+
+
+class UserModelListAPIView(ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAdmin]
+    authentication_classes = [TokenAuthentication]
+
+
+class UserModelDestroyAPiView(DestroyAPIView):
+    queryset = User.objects.all()
